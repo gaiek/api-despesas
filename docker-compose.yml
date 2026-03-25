@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   blog:
-    container_name: postgres
+    container_name: api-despesas
     image: postgres:15-alpine
     ports:
       - '5432:5432'

@@ -11,3 +11,39 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+
+
+model User {
+  id         String   @id @default(uuid())
+  name       String
+  email      String   @unique
+  password   String
+  coast      Coast[]
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
+model Coast {
+  id          String   @id @default(uuid())
+  title       String
+  description String?
+  amount      Decimal  @db.Decimal(10, 2)
+  date        DateTime
+  category    Category   @default(OTHERS)
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      String
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+}
+
+enum Category {
+  FOOD
+  HEALTH
+  HYGIENE
+  RENTAL
+  INTERNET
+  WATER
+  ENERGY
+  ENTERTAINMENT
+  OTHERS
+}
