@@ -6,8 +6,9 @@ export const createCoastSchema = z.object({
   body: z.object({
     title: z.string().min(2),
     description: z.string().optional(),
+    category: z.nativeEnum(Category).optional(),
     amount: z.number(),
-    date: z.date(),
+    date: z.coerce.date(),
   }),
 })
 
@@ -18,7 +19,7 @@ export const updateCoastSchema = z.object({
     title: z.string().min(2).optional(),
     description: z.string().optional(),
     amount: z.number().optional(),
-    date: z.date().optional(),
+    date: z.coerce.date().optional(),
     category: z.nativeEnum(Category).optional(),
   }),
   params: z.object({
